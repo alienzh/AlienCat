@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    def globalConfig = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfig.androidCompileSdkVer
+    buildToolsVersion globalConfig.androidBuildToolsVer
+
+    defaultConfig {
+        applicationId "com.zhangw.aliencat"
+        minSdkVersion globalConfig.androidMinSdkVer
+        targetSdkVersion globalConfig.androidTargetVer
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    def androidDependencies = rootProject.ext.androidDependencies
+    def viewDependencies = rootProject.ext.viewDependencies
+
+    implementation androidDependencies.appcompat_v7
+    implementation androidDependencies.recyclerView
+//    implementation androidDependencies.support_v4
+    implementation androidDependencies.design
+    implementation androidDependencies.constraint_layout
+
+//    implementation viewDependencies.leakcanary
+//    implementation viewDependencies.leakcanaryRelease
+    implementation viewDependencies.glide
+//    annotationProcessor viewDependencies.glideProcessor
+    implementation viewDependencies.volley
+    implementation viewDependencies.litepal
+    implementation viewDependencies.gson
+    implementation viewDependencies.andPermission
+}
