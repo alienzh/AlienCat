@@ -2,10 +2,16 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+repositories {
+    maven {
+        url "http://maven.aliyun.com/nexus/content/repositories/releases"
+    }
+}
+
 android {
     def globalConfig = rootProject.extensions.getByName("ext")
 
-    compileSdkVersion globalConfig.androidCompileSdkVer
+    compileSdkVersion 26
     buildToolsVersion globalConfig.androidBuildToolsVer
 
     defaultConfig {
@@ -13,7 +19,7 @@ android {
         minSdkVersion globalConfig.androidMinSdkVer
         targetSdkVersion globalConfig.androidTargetVer
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -28,24 +34,24 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-
     def androidDependencies = rootProject.ext.androidDependencies
     def viewDependencies = rootProject.ext.viewDependencies
-
     implementation androidDependencies.appcompat_v7
     implementation androidDependencies.recyclerView
-//    implementation androidDependencies.support_v4
+    //    implementation androidDependencies.support_v4
     implementation androidDependencies.design
     implementation androidDependencies.constraint_layout
-
-//    implementation viewDependencies.leakcanary
-//    implementation viewDependencies.leakcanaryRelease
+    //    implementation viewDependencies.leakcanary
+    //    implementation viewDependencies.leakcanaryRelease
     implementation viewDependencies.glide
-//    annotationProcessor viewDependencies.glideProcessor
+    //    annotationProcessor viewDependencies.glideProcessor
     implementation viewDependencies.volley
     implementation viewDependencies.litepal
     implementation viewDependencies.gson
     implementation viewDependencies.andPermission
+    implementation viewDependencies.fragmentation
+    implementation viewDependencies.aliyunHotfix
+    implementation viewDependencies.utilCode
 }

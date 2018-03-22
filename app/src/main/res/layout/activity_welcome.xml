@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="aliencom.zhangw.aliencat.WelcomeActivity">
+    tools:context="com.zhangw.aliencat.WelcomeActivity">
 
     <TextView
         android:id="@+id/sample_text"
@@ -17,4 +17,14 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
+
+    <Button
+        android:id="@+id/sample_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sample_text"/>
 </android.support.constraint.ConstraintLayout>
