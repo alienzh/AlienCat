@@ -4,18 +4,22 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.zhangw.aliencat.R;
+import com.zhangw.aliencat.base.BaseActivity;
 
 /**
  * @author zhangw
  * @date 2018/3/23.
  * 引导页面
  */
-public class GuideActivity extends Activity {
+public class GuideActivity extends BaseActivity {
+    
+    @Override
+    public int getLayoutId(Bundle savedInstanceState) {
+        return R.layout.activity_guide;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void initEnv() {
 
-        setContentView(R.layout.activity_guide);
     }
 }

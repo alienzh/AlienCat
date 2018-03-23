@@ -23,6 +23,7 @@
         android:layout_marginEnd="15dp"
         android:layout_marginTop="15dp"
         android:text="@string/jump"
+        android:gravity="center"
         android:textSize="12sp"
         android:textColor="@color/black"
         app:in_circle_color="@color/transparent"

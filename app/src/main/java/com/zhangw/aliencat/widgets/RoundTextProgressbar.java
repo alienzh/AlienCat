@@ -152,8 +152,6 @@ public class RoundTextProgressbar extends AppCompatTextView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
         //获取view的边界
         getDrawingRect(mBounds);
 

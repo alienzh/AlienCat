@@ -50,6 +50,7 @@ dependencies {
 //    implementation viewDependencies.leakcanaryRelease
     implementation viewDependencies.butterknife
     //3.0 需要添加
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     annotationProcessor viewDependencies.butterknifeProcessor
     implementation viewDependencies.glide
     //annotationProcessor viewDependencies.glideProcessor

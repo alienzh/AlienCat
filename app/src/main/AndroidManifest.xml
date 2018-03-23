@@ -26,8 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.main.MainActivity">
-        </activity>
+        <activity android:name=".ui.main.MainActivity"/>
 
         <!-- 阿里云 hotfix start -->
         <meta-data
@@ -43,10 +42,8 @@
         <activity
             android:name=".ui.welcome.GuideActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_guide">
-        </activity>
-        <activity android:name=".ui.welcome.KpActivity">
-        </activity>
+            android:label="@string/title_activity_guide"/>
+        <activity android:name=".ui.welcome.KpActivity"/>
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.zhangw.aliencat.R;
+import com.zhangw.aliencat.base.BaseActivity;
 import com.zhangw.aliencat.widgets.RoundTextProgressbar;
 
 import butterknife.BindView;
@@ -18,7 +19,7 @@ import butterknife.OnClick;
  * @date 2018/3/23.
  * 开屏页
  */
-public class KpActivity extends AppCompatActivity {
+public class KpActivity extends BaseActivity {
 
     /**
      * 跳转
@@ -29,15 +30,12 @@ public class KpActivity extends AppCompatActivity {
     Button restart;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kp);
-        ButterKnife.bind(this);
-
-        initView();
+    public int getLayoutId(Bundle savedInstanceState) {
+        return R.layout.activity_kp;
     }
 
-    private void initView() {
+    @Override
+    public void initEnv() {
         mRoundProgressbar.setTimeMills(3000);
         mRoundProgressbar.setOnCountProgressListener(100, new RoundTextProgressbar.OnCountProgressListener() {
             @Override
