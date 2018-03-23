@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--倒计时progress-->
+    <declare-styleable name="CircleTextProgressbar">
+        <attr name="out_circle_color" format="color"/>
+        <attr name="in_circle_color" format="color"/>
+        <attr name="out_circle_width" format="dimension"/>
+        <attr name="progress_color" format="color"/>
+        <attr name="progress_width" format="dimension"/>
+    </declare-styleable>
+</resources>

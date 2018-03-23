@@ -19,6 +19,8 @@ ext {
     //检测内存溢出 https://github.com/square/leakcanary
     leakcanaryVer = "1.5.4"
     leakcanaryReleaseVer = "1.5.4"
+    //https://github.com/JakeWharton/butterknife
+    butterknifeVer = "8.8.1"
 
     //https://github.com/bumptech/glide
     glideVer = "4.6.1"
@@ -46,16 +48,18 @@ ext {
     ]
 
     viewDependencies = [
-            leakcanary       : "com.squareup.leakcanary:leakcanary-android:${leakcanaryVer}",
-            leakcanaryRelease: "com.squareup.leakcanary:leakcanary-android-no-op:${leakcanaryReleaseVer}",
-            glide            : "com.github.bumptech.glide:glide:${glideVer}",
-            glideProcessor   : "com.github.bumptech.glide:compiler:${glideProcessorVer}",
-            volley           : "com.mcxiaoke.volley:library:${volleyVer}",
-            litepal          : "org.litepal.android:core:${litepalVer}",
-            gson             : "com.google.code.gson:gson:${gsonVer}",
-            andPermission    : "com.yanzhenjie:permission:${andPermissionVer}",
-            fragmentation    : "me.yokeyword:fragmentation:${fragmentationVer}",
-            aliyunHotfix     : "com.aliyun.ams:alicloud-android-hotfix:${aliyunHotfixVer}",
-            utilCode         : "com.blankj:utilcode:${utilCodeVer}",
+            leakcanary          : "com.squareup.leakcanary:leakcanary-android:${leakcanaryVer}",
+            leakcanaryRelease   : "com.squareup.leakcanary:leakcanary-android-no-op:${leakcanaryReleaseVer}",
+            butterknife         : "com.jakewharton:butterknife:${butterknifeVer}",
+            butterknifeProcessor: "com.jakewharton:butterknife-compiler:${butterknifeVer}",
+            glide               : "com.github.bumptech.glide:glide:${glideVer}",
+            glideProcessor      : "com.github.bumptech.glide:compiler:${glideProcessorVer}",
+            volley              : "com.mcxiaoke.volley:library:${volleyVer}",
+            litepal             : "org.litepal.android:core:${litepalVer}",
+            gson                : "com.google.code.gson:gson:${gsonVer}",
+            andPermission       : "com.yanzhenjie:permission:${andPermissionVer}",
+            fragmentation       : "me.yokeyword:fragmentation:${fragmentationVer}",
+            aliyunHotfix        : "com.aliyun.ams:alicloud-android-hotfix:${aliyunHotfixVer}",
+            utilCode            : "com.blankj:utilcode:${utilCodeVer}",
     ]
 }

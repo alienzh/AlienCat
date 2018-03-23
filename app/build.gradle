@@ -31,6 +31,9 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+    defaultConfig {
+        multiDexEnabled true
+    }
 }
 
 dependencies {
@@ -40,13 +43,16 @@ dependencies {
     def viewDependencies = rootProject.ext.viewDependencies
     implementation androidDependencies.appcompat_v7
     implementation androidDependencies.recyclerView
-    //    implementation androidDependencies.support_v4
+    implementation androidDependencies.support_v4
     implementation androidDependencies.design
     implementation androidDependencies.constraint_layout
-    //    implementation viewDependencies.leakcanary
-    //    implementation viewDependencies.leakcanaryRelease
+//    implementation viewDependencies.leakcanary
+//    implementation viewDependencies.leakcanaryRelease
+    implementation viewDependencies.butterknife
+    //3.0 需要添加
+    annotationProcessor viewDependencies.butterknifeProcessor
     implementation viewDependencies.glide
-    //    annotationProcessor viewDependencies.glideProcessor
+    //annotationProcessor viewDependencies.glideProcessor
     implementation viewDependencies.volley
     implementation viewDependencies.litepal
     implementation viewDependencies.gson

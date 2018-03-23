@@ -1,4 +1,4 @@
-package com.zhangw.aliencat;
+package com.zhangw.aliencat.ui;
 
 import android.app.Application;
 import android.content.Context;
