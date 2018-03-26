@@ -64,11 +64,11 @@ public abstract class BaseToolbarActivity extends SupportActivity {
      * 初始化头部Toolbar控件
      */
     private void initToolbar() {
-        mToolbar =  findViewById(R.id.toolbar);
-        mTvHeadTitle =  mToolbar.findViewById(R.id.tvHeadTitle);
-        mTvHeadRight =  mToolbar.findViewById(R.id.tvHeadRight);
-        mIvHeadRight =  mToolbar.findViewById(R.id.ivHeadRight);
-        mRlHeadRight =  mToolbar.findViewById(R.id.rlHeadRight);
+        mToolbar = findViewById(R.id.toolbar);
+        mTvHeadTitle = mToolbar.findViewById(R.id.tvHeadTitle);
+        mTvHeadRight = mToolbar.findViewById(R.id.tvHeadRight);
+        mIvHeadRight = mToolbar.findViewById(R.id.ivHeadRight);
+        mRlHeadRight = mToolbar.findViewById(R.id.rlHeadRight);
         mTbDiver = findViewById(R.id.tbDiver);
         if (mToolbar != null) {
             mToolbar.setTitle("");
@@ -189,7 +189,7 @@ public abstract class BaseToolbarActivity extends SupportActivity {
 
     @Override
     public void setContentView(View view) {
-        LinearLayout llRootView = (LinearLayout) findViewById(R.id.llRootView);
+        LinearLayout llRootView = findViewById(R.id.llRootView);
         if (llRootView == null) {
             return;
         }

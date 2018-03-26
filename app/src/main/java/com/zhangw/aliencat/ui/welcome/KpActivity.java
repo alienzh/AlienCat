@@ -1,7 +1,6 @@
 package com.zhangw.aliencat.ui.welcome;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
@@ -11,7 +10,6 @@ import com.zhangw.aliencat.base.BaseActivity;
 import com.zhangw.aliencat.widgets.RoundTextProgressbar;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -36,6 +34,7 @@ public class KpActivity extends BaseActivity {
 
     @Override
     public void initEnv() {
+        showHead(false, false);
         mRoundProgressbar.setTimeMills(3000);
         mRoundProgressbar.setOnCountProgressListener(100, new RoundTextProgressbar.OnCountProgressListener() {
             @Override
@@ -70,6 +69,8 @@ public class KpActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mRoundProgressbar.stop();
+        if (null != mRoundProgressbar) {
+            mRoundProgressbar.stop();
+        }
     }
 }

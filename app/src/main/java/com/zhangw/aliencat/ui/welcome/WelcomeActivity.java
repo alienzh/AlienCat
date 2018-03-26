@@ -24,7 +24,7 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     public void initEnv() {
-
+        showHead(false, false);
     }
 
     @OnClick(R.id.sample_text)
