@@ -61,4 +61,6 @@ dependencies {
     implementation viewDependencies.fragmentation
     implementation viewDependencies.aliyunHotfix
     implementation viewDependencies.utilCode
+    implementation viewDependencies.rxjava
+    implementation viewDependencies.rxandroid
 }

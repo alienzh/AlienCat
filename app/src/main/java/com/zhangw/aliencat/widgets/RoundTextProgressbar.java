@@ -19,7 +19,6 @@ import com.zhangw.aliencat.R;
  * @date 2018/3/23.
  * 倒计时跳过
  */
-
 public class RoundTextProgressbar extends AppCompatTextView {
 
     /**

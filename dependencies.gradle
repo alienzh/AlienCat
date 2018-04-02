@@ -38,6 +38,10 @@ ext {
     aliyunHotfixVer = "3.2.0"
     //https://github.com/Blankj/AndroidUtilCode/blob/master/utilcode/README-CN.md
     utilCodeVer = "1.13.5"
+    //https://github.com/ReactiveX/RxJava
+    rxjava = "2.1.12"
+    //https://github.com/ReactiveX/RxAndroid
+    rxandroid = "2.0.2"
 
     androidDependencies = [
             recyclerView     : "com.android.support:recyclerview-v7:${supportyLibVer}",
@@ -61,5 +65,7 @@ ext {
             fragmentation       : "me.yokeyword:fragmentation:${fragmentationVer}",
             aliyunHotfix        : "com.aliyun.ams:alicloud-android-hotfix:${aliyunHotfixVer}",
             utilCode            : "com.blankj:utilcode:${utilCodeVer}",
+            rxjava              : "io.reactivex.rxjava2:rxjava:${rxjava}",
+            rxandroid           : "io.reactivex.rxjava2:rxandroid:${rxandroid}"
     ]
 }
