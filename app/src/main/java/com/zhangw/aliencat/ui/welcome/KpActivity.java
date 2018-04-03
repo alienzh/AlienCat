@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.zhangw.aliencat.R;
 import com.zhangw.aliencat.base.BaseActivity;
+import com.zhangw.aliencat.ui.main.MainActivity;
 import com.zhangw.aliencat.widgets.RoundTextProgressbar;
 
 import butterknife.BindView;
@@ -49,6 +51,8 @@ public class KpActivity extends BaseActivity {
 
     private void goNextPage() {
         ToastUtils.showLong("时间到，执行跳转");
+
+        ActivityUtils.startActivity(this, MainActivity.class);
     }
 
     @OnClick({R.id.roundProgressbar, R.id.restart})

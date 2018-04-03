@@ -7,4 +7,83 @@
     android:layout_height="match_parent"
     tools:context="com.zhangw.aliencat.ui.main.MainActivity">
 
+    <Button
+        android:id="@+id/point"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="point"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"/>
+
+    <Button
+        android:id="@+id/points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="points"
+        tools:layout_editor_absoluteX="88dp"
+        tools:layout_editor_absoluteY="0dp"/>
+
+    <Button
+        android:id="@+id/line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="line"
+        tools:layout_editor_absoluteX="170dp"
+        tools:layout_editor_absoluteY="0dp"/>
+
+    <Button
+        android:id="@+id/lines"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="lines"
+        tools:layout_editor_absoluteX="258dp"
+        tools:layout_editor_absoluteY="0dp"/>
+
+    <Button
+        android:id="@+id/drawRect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="drawRect"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="48dp"/>
+
+    <Button
+        android:id="@+id/drawOval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="drawOval"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="96dp"/>
+
+    <Button
+        android:id="@+id/drawRoundRect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="drawRoundRect"
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="48dp"/>
+
+    <Button
+        android:id="@+id/drawCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="drawCircle"
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="96dp"/>
+
+    <Button
+        android:id="@+id/drawArc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="drawArc"
+        tools:layout_editor_absoluteX="208dp"
+        tools:layout_editor_absoluteY="96dp"/>
+
+    <Button
+        android:id="@+id/clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="clear"
+        tools:layout_editor_absoluteX="243dp"
+        tools:layout_editor_absoluteY="48dp"/>
 </android.support.constraint.ConstraintLayout>
