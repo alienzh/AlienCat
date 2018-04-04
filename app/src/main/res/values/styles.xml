@@ -10,6 +10,14 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!-- 欢迎页面主题 -->
+    <style name="WelcomeTheme" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/transparent</item>
+        <item name="colorPrimaryDark">@color/transparent</item>
+        <item name="android:windowBackground">@drawable/welcome</item>
+    </style>
+
     <!--设置toolbar样式-->
     <style name="ToolbarTitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">15sp</item>

@@ -1,15 +1,12 @@
 package com.zhangw.aliencat.ui.main;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.RectF;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.zhangw.aliencat.R;
 import com.zhangw.aliencat.base.BaseActivity;
+import com.zhangw.aliencat.widgets.PView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -38,6 +35,8 @@ public class MainActivity extends BaseActivity {
     Button mDrawCircle;
     @BindView(R.id.drawArc)
     Button mDrawArc;
+    @BindView(R.id.view)
+    PView mPView;
 
     @Override
     public int getLayoutId(Bundle savedInstanceState) {
@@ -46,37 +45,41 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initEnv() {
-
+        showHead(false, false);
     }
-
-    private Canvas mCanvas = new Canvas();
-    private Paint mPaint = new Paint();
-    private Rect mRect;
-    private RectF mRectF;
 
     @OnClick({R.id.point, R.id.points, R.id.line, R.id.lines, R.id.drawRect, R.id.drawOval, R.id.drawRoundRect, R.id.drawCircle, R.id.drawArc, R.id.clear})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.point:
+                mPView.drawView(PView.POINT);
                 break;
             case R.id.points:
+                mPView.drawView(PView.POINTS);
                 break;
             case R.id.line:
+                mPView.drawView(PView.LINE);
                 break;
             case R.id.lines:
+                mPView.drawView(PView.LINES);
                 break;
             case R.id.drawRect:
+                mPView.drawView(PView.DRAWRECT);
                 break;
             case R.id.drawOval:
+                mPView.drawView(PView.DRAWOVAL);
                 break;
             case R.id.drawRoundRect:
+                mPView.drawView(PView.DRAWROUNDRECT);
                 break;
             case R.id.drawCircle:
+                mPView.drawView(PView.DRAWCIRCLE);
                 break;
             case R.id.drawArc:
+                mPView.drawView(PView.DRAWARC);
                 break;
             case R.id.clear:
-                mCanvas.restore();
+                mPView.clear();
                 break;
             default:
                 break;

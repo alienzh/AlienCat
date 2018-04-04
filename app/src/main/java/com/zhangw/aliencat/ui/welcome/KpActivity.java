@@ -50,8 +50,6 @@ public class KpActivity extends BaseActivity {
     }
 
     private void goNextPage() {
-        ToastUtils.showLong("时间到，执行跳转");
-
         ActivityUtils.startActivity(this, MainActivity.class);
     }
 

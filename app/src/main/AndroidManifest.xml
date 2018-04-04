@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.welcome.WelcomeActivity">
+            android:name=".ui.welcome.WelcomeActivity"
+            android:theme="@style/WelcomeTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -43,6 +44,8 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_guide"/>
         <activity android:name=".ui.welcome.KpActivity"/>
+        <activity android:name=".ui.main.HomeActivity">
+        </activity>
     </application>
 
 </manifest>

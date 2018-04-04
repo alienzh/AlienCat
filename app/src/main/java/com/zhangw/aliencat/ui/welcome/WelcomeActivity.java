@@ -6,16 +6,18 @@ import android.widget.TextView;
 import com.zhangw.aliencat.R;
 import com.zhangw.aliencat.base.BaseActivity;
 
+import java.util.concurrent.TimeUnit;
+
 import butterknife.BindView;
-import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
 
 /**
  * @author zhangw
  * @date 2018/3/23.
  */
 public class WelcomeActivity extends BaseActivity {
-    @BindView(R.id.sample_text)
-    TextView mSampleText;
+    private final static int GO_NEXT = 0xAA;
 
     @Override
     public int getLayoutId(Bundle savedInstanceState) {
@@ -25,10 +27,15 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     public void initEnv() {
         showHead(false, false);
-    }
-
-    @OnClick(R.id.sample_text)
-    public void onViewClicked() {
-        toPage(KpActivity.class);
+        Observable.just(GO_NEXT)
+                .delay(3000, TimeUnit.MILLISECONDS)
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        if (integer == GO_NEXT) {
+                            toPage(KpActivity.class);
+                        }
+                    }
+                });
     }
 }

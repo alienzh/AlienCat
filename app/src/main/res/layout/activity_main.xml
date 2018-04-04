@@ -11,79 +11,93 @@
         android:id="@+id/point"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="point"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"/>
+        android:text="point"/>
 
     <Button
         android:id="@+id/points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="points"
-        tools:layout_editor_absoluteX="88dp"
-        tools:layout_editor_absoluteY="0dp"/>
+        app:layout_constraintBottom_toTopOf="@+id/drawRect"
+        app:layout_constraintStart_toEndOf="@+id/point"
+        app:layout_constraintTop_toTopOf="@+id/point"/>
 
     <Button
         android:id="@+id/line"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="line"
-        tools:layout_editor_absoluteX="170dp"
-        tools:layout_editor_absoluteY="0dp"/>
+        app:layout_constraintBottom_toBottomOf="@+id/points"
+        app:layout_constraintStart_toEndOf="@+id/points"
+        app:layout_constraintTop_toTopOf="@+id/points"/>
 
     <Button
         android:id="@+id/lines"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="lines"
-        tools:layout_editor_absoluteX="258dp"
-        tools:layout_editor_absoluteY="0dp"/>
+        app:layout_constraintBottom_toBottomOf="@+id/line"
+        app:layout_constraintStart_toEndOf="@id/line"
+        app:layout_constraintTop_toTopOf="@+id/line"/>
 
     <Button
         android:id="@+id/drawRect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="drawRect"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="48dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/point"/>
 
     <Button
         android:id="@+id/drawOval"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="drawOval"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="96dp"/>
+        app:layout_constraintBottom_toBottomOf="@+id/drawRect"
+        app:layout_constraintStart_toEndOf="@id/drawRect"
+        app:layout_constraintTop_toTopOf="@+id/drawRect"/>
 
     <Button
         android:id="@+id/drawRoundRect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="drawRoundRect"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="48dp"/>
+       app:layout_constraintStart_toEndOf="@+id/drawOval"
+        app:layout_constraintTop_toTopOf="@+id/drawOval"
+        app:layout_constraintBottom_toBottomOf="@+id/drawOval"/>
 
     <Button
         android:id="@+id/drawCircle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="drawCircle"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="96dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/drawRect"/>
 
     <Button
         android:id="@+id/drawArc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="drawArc"
-        tools:layout_editor_absoluteX="208dp"
-        tools:layout_editor_absoluteY="96dp"/>
+        app:layout_constraintBottom_toBottomOf="@+id/drawCircle"
+        app:layout_constraintStart_toEndOf="@+id/drawCircle"
+        app:layout_constraintTop_toTopOf="@+id/drawCircle"/>
 
     <Button
         android:id="@+id/clear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="clear"
-        tools:layout_editor_absoluteX="243dp"
-        tools:layout_editor_absoluteY="48dp"/>
+        app:layout_constraintBottom_toBottomOf="@+id/drawArc"
+        app:layout_constraintStart_toEndOf="@+id/drawArc"
+        app:layout_constraintTop_toTopOf="@+id/drawArc"/>
+
+    <com.zhangw.aliencat.widgets.PView
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 </android.support.constraint.ConstraintLayout>
