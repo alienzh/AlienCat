@@ -3,8 +3,10 @@ package com.zhangw.aliencat.ui.welcome;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.zhangw.aliencat.R;
 import com.zhangw.aliencat.base.BaseActivity;
+import com.zhangw.aliencat.ui.main.HomeActivity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -33,7 +35,8 @@ public class WelcomeActivity extends BaseActivity {
                     @Override
                     public void accept(Integer integer) throws Exception {
                         if (integer == GO_NEXT) {
-                            toPage(KpActivity.class);
+                            ActivityUtils.startActivity(HomeActivity.class);
+                            ActivityUtils.finishActivity(WelcomeActivity.class,true);
                         }
                     }
                 });

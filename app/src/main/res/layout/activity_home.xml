@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,69 +7,101 @@
     tools:context="com.zhangw.aliencat.ui.main.HomeActivity">
 
     <FrameLayout
+        android:id="@+id/flContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottomLayout"/>
-    
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/bottomLayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:background="@color/common_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-        
+
         <FrameLayout
+            android:id="@+id/flHome"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
-            
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="dada"/>
-        </FrameLayout>
-        
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:padding="3dp">
 
             <TextView
+                android:id="@+id/tvHome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background=""
-                android:text="dada"/>
+                android:drawablePadding="2dp"
+                android:drawableTop="@drawable/home_state"
+                android:gravity="center"
+                android:text="@string/home"
+                android:textColor="@drawable/home_bottom_text_state"
+                android:textSize="@dimen/size12" />
         </FrameLayout>
-        
+
         <FrameLayout
+            android:id="@+id/flTool"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:padding="3dp">
 
             <TextView
+                android:id="@+id/tvTool"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="dada"/>
+                android:drawablePadding="2dp"
+                android:drawableTop="@drawable/home_tools_state"
+                android:gravity="center"
+                android:text="@string/home_tool"
+                android:textColor="@drawable/home_bottom_text_state"
+                android:textSize="@dimen/size12" />
         </FrameLayout>
-        
+
         <FrameLayout
+            android:id="@+id/flTest"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:padding="3dp">
 
             <TextView
+                android:id="@+id/tvTest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="dada"/>
+                android:drawablePadding="2dp"
+                android:drawableTop="@drawable/home_test_state"
+                android:gravity="center"
+                android:text="@string/home_test"
+                android:textColor="@drawable/home_bottom_text_state"
+                android:textSize="@dimen/size12" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/flMine"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="3dp">
+
+            <TextView
+                android:id="@+id/tvMine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawablePadding="2dp"
+                android:drawableTop="@drawable/home_mine_state"
+                android:gravity="center"
+                android:text="@string/home_mine"
+                android:textColor="@drawable/home_bottom_text_state"
+                android:textSize="@dimen/size12" />
         </FrameLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

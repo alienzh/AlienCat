@@ -1,11 +1,13 @@
 package com.zhangw.aliencat.base;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
 import com.blankj.utilcode.util.Utils;
@@ -14,52 +16,50 @@ import java.lang.ref.WeakReference;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import me.yokeyword.fragmentation.SupportFragment;
 
 /**
- * @author xiemy
- * @date 2017/7/28.
+ * @user zhangw
+ * @date 2018/4/8.
+ * 描述
  */
-public abstract class BaseActivity extends BaseToolbarActivity {
+public abstract class BaseFragment extends SupportFragment {
 
-    public String TAG = this.getClass().getSimpleName();
-    protected Context mContext;
-    protected Unbinder unbinder;
+    public static final String ARG_PARAM1 = "param1";
+    public static final String ARG_PARAM2 = "param2";
+    Unbinder unbinder;
+
+    private String mParam1;
+    private String mParam2;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutId(savedInstanceState));
-        unbinder = ButterKnife.bind(this);
-        mContext = this;
 
-        initEnv();
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
     }
 
+    @Nullable
     @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        setIntent(intent);
-        getExtraData();
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(getLayoutId(savedInstanceState), container, false);
+        unbinder = ButterKnife.bind(this, view);
+        initEnv();
+        return view;
     }
-
-    public Intent getExtraData() {
-        return getIntent() != null ? getIntent() : new Intent();
-    }
-
-    /**
-     * 获取页面布局
-     *
-     * @param savedInstanceState savedInstanceState
-     * @return 页面布局资源
-     */
-    public abstract
-    @LayoutRes
-    int getLayoutId(Bundle savedInstanceState);
 
     /**
      * 初始化数据
      */
     public abstract void initEnv();
+
+    public abstract
+    @LayoutRes
+    int getLayoutId(Bundle savedInstanceState);
 
     /**
      * 打开软键盘
@@ -79,7 +79,7 @@ public abstract class BaseActivity extends BaseToolbarActivity {
      * 隐藏软键盘
      */
     public void hideSoftKeyboard() {
-        View view = getCurrentFocus();
+        View view = _mActivity.getCurrentFocus();
         if (view != null) {
             WeakReference<View> weakReference = new WeakReference<>(view);
             InputMethodManager inputMethodManager = ((InputMethodManager) Utils.getApp().getSystemService(Context.INPUT_METHOD_SERVICE));
@@ -89,10 +89,9 @@ public abstract class BaseActivity extends BaseToolbarActivity {
         }
     }
 
-
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         unbinder.unbind();
     }
 }

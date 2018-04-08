@@ -10,4 +10,6 @@
     <color name="common_bg">#F2F2F2</color>
     <color name="common_diver">#F2F2F2</color>
     <color name="transparent">#00000000</color>
+    <color name="home_bottom_text_state">#1296db</color>
+    <color name="home_bottom_text">#707070</color>
 </resources>
