@@ -17,8 +17,8 @@ import butterknife.OnClick;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
- * @user ${USER}
- * @date ${DATE}.
+ * @author zhangw
+ * @date 2018/4/8.
  * 描述：首页
  */
 public class HomeActivity extends BaseActivity {

@@ -9,7 +9,7 @@ import com.zhangw.aliencat.base.BaseFragment;
 import butterknife.BindView;
 
 /**
- * @user zhangw
+ * @author  zhangw
  * @date 2018/4/8.
  * 描述
  */
