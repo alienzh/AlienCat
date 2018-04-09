@@ -68,6 +68,8 @@
         <activity
             android:name=".ui.test.ScreenRotationActivity"
             android:configChanges="orientation|screenSize" />
+
+        <activity android:name=".ui.test.TestVolleyActivity" />
     </application>
 
 </manifest>

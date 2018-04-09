@@ -5,14 +5,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.zhangw.aliencat.R;
-import com.zhangw.aliencat.base.BaseFragment;
+import com.zhangw.aliencat.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,37 +19,30 @@ import butterknife.BindView;
 
 /**
  * @author zhangw
- * @date 2018/4/8.
- * 描述
+ * @date 2018/4/9.
+ * 描述 volley测试
  */
-public class TestFragment extends BaseFragment {
-
-    @BindView(R.id.rvTest)
-    RecyclerView rvTest;
+public class TestVolleyActivity extends BaseActivity {
+    @BindView(R.id.rvVolley)
+    RecyclerView rvVolley;
 
     private BaseQuickAdapter<String, BaseViewHolder> mQuickAdapter;
 
-    public static TestFragment newInstance() {
-
-        Bundle args = new Bundle();
-
-        TestFragment fragment = new TestFragment();
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    public int getLayoutId(Bundle savedInstanceState) {
+        return R.layout.activity_volley;
     }
 
     @Override
     public void initEnv() {
+        showHead(true, true);
+        setHeadTitle("volley");
         List<String> data = new ArrayList<>();
-        data.add("view");
-        data.add("volley");
-        data.add("network state");
-        data.add("screenRotation");
-        data.add("...");
+        data.add("StringRequest");
+        data.add("JsonObjectRequest");
 
-        rvTest.setLayoutManager(new LinearLayoutManager(_mActivity));
+        rvVolley.setLayoutManager(new LinearLayoutManager(this));
         mQuickAdapter = new BaseQuickAdapter<String, BaseViewHolder>(R.layout.support_simple_spinner_dropdown_item, data) {
-
             @Override
             protected void convert(BaseViewHolder helper, String item) {
                 helper.setText(android.R.id.text1, item);
@@ -59,7 +50,7 @@ public class TestFragment extends BaseFragment {
                 helper.addOnClickListener(android.R.id.text1);
             }
         };
-        rvTest.setAdapter(mQuickAdapter);
+        rvVolley.setAdapter(mQuickAdapter);
         mQuickAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
@@ -69,27 +60,14 @@ public class TestFragment extends BaseFragment {
                 }
                 ToastUtils.showLong(str);
                 switch (str) {
-                    case "view":
-                        ActivityUtils.startActivity(TestViewActivity.class);
+                    case "StringRequest":
                         break;
-                    case "volley":
-                        ActivityUtils.startActivity(TestVolleyActivity.class);
-                        break;
-                    case "network state":
-                        ActivityUtils.startActivity(NetworkStateActivity.class);
-                        break;
-                    case "screenRotation":
-                        ActivityUtils.startActivity(ScreenRotationActivity.class);
+                    case "JsonObjectRequest":
                         break;
                     default:
                         break;
                 }
             }
         });
-    }
-
-    @Override
-    public int getLayoutId(Bundle savedInstanceState) {
-        return R.layout.fragment_test;
     }
 }
