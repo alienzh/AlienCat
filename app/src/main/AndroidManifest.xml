@@ -55,13 +55,19 @@
         <activity android:name=".ui.test.NetworkStateActivity" />
 
         <receiver android:name=".ui.receiver.NetworkStateReceiver">
-            <intent-filter >
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-                <action android:name="android.net.wifi.WIFI_STATE_CHANGED"/>
-                <action android:name="android.net.wifi.STATE_CHANGE"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+                <action android:name="android.net.wifi.STATE_CHANGE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
+
+        <!--屏幕旋转测试-->
+        <activity
+            android:name=".ui.test.ScreenRotationActivity"
+            android:configChanges="orientation|screenSize" />
     </application>
 
 </manifest>

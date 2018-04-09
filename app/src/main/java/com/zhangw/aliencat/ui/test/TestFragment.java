@@ -46,6 +46,7 @@ public class TestFragment extends BaseFragment {
         data.add("view");
         data.add("volley");
         data.add("network state");
+        data.add("screenRotation");
         data.add("...");
 
         rvTest.setLayoutManager(new LinearLayoutManager(_mActivity));
@@ -62,12 +63,25 @@ public class TestFragment extends BaseFragment {
         mQuickAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                ToastUtils.showLong((String) view.getTag());
                 String str = (String) view.getTag();
-                if (StringUtils.equals(str, "view")) {
-                    ActivityUtils.startActivity(TestViewActivity.class);
-                } else if (StringUtils.equals(str, "network state")) {
-                    ActivityUtils.startActivity(NetworkStateActivity.class);
+                if (StringUtils.isEmpty(str)) {
+                    return;
+                }
+                ToastUtils.showLong(str);
+                switch (str) {
+                    case "view":
+                        ActivityUtils.startActivity(TestViewActivity.class);
+                        break;
+                    case "volley":
+                        break;
+                    case "network state":
+                        ActivityUtils.startActivity(NetworkStateActivity.class);
+                        break;
+                    case "screenRotation":
+                        ActivityUtils.startActivity(ScreenRotationActivity.class);
+                        break;
+                    default:
+                        break;
                 }
             }
         });
