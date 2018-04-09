@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.zhangw.aliencat">
+    package="com.zhangw.aliencat">
 
     <!-- 网络权限 -->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!-- 外部存储读权限，调试工具加载本地补丁需要 -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".ui.DApplication"
@@ -21,31 +21,47 @@
             android:name=".ui.welcome.WelcomeActivity"
             android:theme="@style/WelcomeTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.test.TestViewActivity"/>
 
         <!-- 阿里云 hotfix start -->
         <meta-data
             android:name="com.taobao.android.hotfix.IDSECRET"
-            android:value="24831421"/>
+            android:value="24831421" />
         <meta-data
             android:name="com.taobao.android.hotfix.APPSECRET"
-            android:value="1b71587afac711f64b638c5130607998"/>
+            android:value="1b71587afac711f64b638c5130607998" />
         <meta-data
             android:name="com.taobao.android.hotfix.RSASECRET"
-            android:value="MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCPuif6JCXY3uMtw6KbExKI9dj5zIkXg7Vnzpqy2XI1qz3PixU2loKAyKlWOnV1RU8/Sho2buwMMfnhBFTe6a6tY7NnZh/zMGHQUWZ/t1e0oVGUpas/e7sjf5Xv+8zkUugbKIgdvK/X7wa3LCQ3Fe6u13egEacqSL8kfVrEdDIvkuDveBZUz9dcjNb5qRghCsVrFzQa7e//KTLf0+bG1ps2oMQ8mggGLEDiVYP1g06OeB94UH3u+ACgZ2OCRdt2uZrCfuQewW5K0Z1xvk6EYa+EU/S8+nKg54tHwFXYM1zLSgYbeJEv0PK+B8RwR73B7fQUcccv+xruCLe1nUjn0ta/AgMBAAECggEALKEDVNrwnZzoMgezcC/F651bWIW4dALDy44N30dB/YRE1zM6zQ6DS3YDjvDsFBQHfYGHDiv3Q/oou0RbDjTFtrVkudCuTxdQ6By+lR3bMA1/hYbD3ByRiX5Okow/nQ5ZYEV/rqwudgCUt0APpsM6sDPbw2p329tm7u+1xZbHFpor7hIj4WLRzLo8ShAW7yXR5WNReiSMZ4SVRcWstbgeQADyVcy3w1jHD5zQDDN3OF4vFNdTPb2vG3G1xmAIHn17L/SJwBSak22L+I0MGteCkACS2ZRfgI9VHKRO4N0cgjJctuzRzKpesRfJdEb/EBk4w/+leLhLTfrwGUROp4sPgQKBgQD4w/1QvFOx/bkTC6NIOEWdM16PXXeNfL5PFzWoBFOGEiklpYGW8o7pYQum5HCYJwTtDidCvYlGKe/fVhbbkCYbRBeP3tH9YkqHm6iU/rY/CKqRUZpRTYDqn+xkiXJqsaSi74m0yQJFzHlQ9bdUsalTEefr99aiuxLKzj6gHxwMnwKBgQCT6C0uEJA70Y4V2JT1VNJT4TT4zjF9mwlV7cRhlqX0TrhzqIsGRdoMC9HH0bOxDBPSy3+0P4kVxz6QhmIxglHcQ8KC9qpx4563w02Lu53vpXZ6xAXeY6TAQalg4E1+5xBnwngsanp/0FbxICJrpCc7Rhy+zzRLb75SS3mhqmzh4QKBgQCB2cQDfZpugVM29s8vZngn+2VzjkVWbHPmUuYmIsP6asZhqUfApDIm7gon/nwrX8q5drbVppveLQvR110tFMxfVSa7aYLRMZpXuM/BnkdBFeP64M6de8g8MGgzfm9j9ABNMJ3/6SCvkHEO6oPcyLPq8aDO0lqOLPo9NHUKHdMFXwKBgFa7CPNAJzPMmALbc83ApW0mXEehsYe0B+9pc4S+MCZomuTHam6NO2Vg8Oy5XSNur5kmV4Y804f/xAI/qwjZIGOHIGJnfl82WHXtgmVz6RMD9cvbco2L5KoQVuBF52uI1yfg81MoRRj59GGEtGpmYdLyNBz3p/SsW/Ap7fMM2rhBAoGAZDH3/ZOOWzR6KNyXJyiXni09rbiZX7GeW/pWZ1CzT61fHTdopcy1atEMbrfP3iX5r4EAbV54Ep/saZfvS/PAEmB39LTTTrnRm60YnXi1hsHE+m/Jc95DAog702/8HRh/vdKCNqP7z3wM8kmfeW02oeviRPnRYTKyeoJJ22eb+XI="/>
+            android:value="MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCPuif6JCXY3uMtw6KbExKI9dj5zIkXg7Vnzpqy2XI1qz3PixU2loKAyKlWOnV1RU8/Sho2buwMMfnhBFTe6a6tY7NnZh/zMGHQUWZ/t1e0oVGUpas/e7sjf5Xv+8zkUugbKIgdvK/X7wa3LCQ3Fe6u13egEacqSL8kfVrEdDIvkuDveBZUz9dcjNb5qRghCsVrFzQa7e//KTLf0+bG1ps2oMQ8mggGLEDiVYP1g06OeB94UH3u+ACgZ2OCRdt2uZrCfuQewW5K0Z1xvk6EYa+EU/S8+nKg54tHwFXYM1zLSgYbeJEv0PK+B8RwR73B7fQUcccv+xruCLe1nUjn0ta/AgMBAAECggEALKEDVNrwnZzoMgezcC/F651bWIW4dALDy44N30dB/YRE1zM6zQ6DS3YDjvDsFBQHfYGHDiv3Q/oou0RbDjTFtrVkudCuTxdQ6By+lR3bMA1/hYbD3ByRiX5Okow/nQ5ZYEV/rqwudgCUt0APpsM6sDPbw2p329tm7u+1xZbHFpor7hIj4WLRzLo8ShAW7yXR5WNReiSMZ4SVRcWstbgeQADyVcy3w1jHD5zQDDN3OF4vFNdTPb2vG3G1xmAIHn17L/SJwBSak22L+I0MGteCkACS2ZRfgI9VHKRO4N0cgjJctuzRzKpesRfJdEb/EBk4w/+leLhLTfrwGUROp4sPgQKBgQD4w/1QvFOx/bkTC6NIOEWdM16PXXeNfL5PFzWoBFOGEiklpYGW8o7pYQum5HCYJwTtDidCvYlGKe/fVhbbkCYbRBeP3tH9YkqHm6iU/rY/CKqRUZpRTYDqn+xkiXJqsaSi74m0yQJFzHlQ9bdUsalTEefr99aiuxLKzj6gHxwMnwKBgQCT6C0uEJA70Y4V2JT1VNJT4TT4zjF9mwlV7cRhlqX0TrhzqIsGRdoMC9HH0bOxDBPSy3+0P4kVxz6QhmIxglHcQ8KC9qpx4563w02Lu53vpXZ6xAXeY6TAQalg4E1+5xBnwngsanp/0FbxICJrpCc7Rhy+zzRLb75SS3mhqmzh4QKBgQCB2cQDfZpugVM29s8vZngn+2VzjkVWbHPmUuYmIsP6asZhqUfApDIm7gon/nwrX8q5drbVppveLQvR110tFMxfVSa7aYLRMZpXuM/BnkdBFeP64M6de8g8MGgzfm9j9ABNMJ3/6SCvkHEO6oPcyLPq8aDO0lqOLPo9NHUKHdMFXwKBgFa7CPNAJzPMmALbc83ApW0mXEehsYe0B+9pc4S+MCZomuTHam6NO2Vg8Oy5XSNur5kmV4Y804f/xAI/qwjZIGOHIGJnfl82WHXtgmVz6RMD9cvbco2L5KoQVuBF52uI1yfg81MoRRj59GGEtGpmYdLyNBz3p/SsW/Ap7fMM2rhBAoGAZDH3/ZOOWzR6KNyXJyiXni09rbiZX7GeW/pWZ1CzT61fHTdopcy1atEMbrfP3iX5r4EAbV54Ep/saZfvS/PAEmB39LTTTrnRm60YnXi1hsHE+m/Jc95DAog702/8HRh/vdKCNqP7z3wM8kmfeW02oeviRPnRYTKyeoJJ22eb+XI=" />
         <!-- 阿里云 hotfix end -->
+
+        <!--欢迎页面-->
         <activity
             android:name=".ui.welcome.GuideActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_guide"/>
-        <activity android:name=".ui.welcome.KpActivity"/>
-        <activity android:name=".ui.main.HomeActivity">
-        </activity>
+            android:label="@string/title_activity_guide" />
+        <!--开屏页-->
+        <activity android:name=".ui.welcome.KpActivity" />
+        <!--主页-->
+        <activity android:name=".ui.main.HomeActivity" />
+
+        <!--测试 自定义view-->
+        <activity android:name=".ui.test.TestViewActivity" />
+        <!--测试 网络监听-->
+        <activity android:name=".ui.test.NetworkStateActivity" />
+
+        <receiver android:name=".ui.receiver.NetworkStateReceiver">
+            <intent-filter >
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED"/>
+                <action android:name="android.net.wifi.STATE_CHANGE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -44,6 +45,7 @@ public class TestFragment extends BaseFragment {
         List<String> data = new ArrayList<>();
         data.add("view");
         data.add("volley");
+        data.add("network state");
         data.add("...");
 
         rvTest.setLayoutManager(new LinearLayoutManager(_mActivity));
@@ -64,6 +66,8 @@ public class TestFragment extends BaseFragment {
                 String str = (String) view.getTag();
                 if (StringUtils.equals(str, "view")) {
                     ActivityUtils.startActivity(TestViewActivity.class);
+                } else if (StringUtils.equals(str, "network state")) {
+                    ActivityUtils.startActivity(NetworkStateActivity.class);
                 }
             }
         });
