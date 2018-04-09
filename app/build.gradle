@@ -59,6 +59,7 @@ dependencies {
     implementation viewDependencies.gson
     implementation viewDependencies.andPermission
     implementation viewDependencies.fragmentation
+    implementation viewDependencies.rvadapterHelper
     implementation viewDependencies.aliyunHotfix
     implementation viewDependencies.utilCode
     implementation viewDependencies.rxjava

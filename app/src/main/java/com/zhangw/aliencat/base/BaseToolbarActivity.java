@@ -143,6 +143,10 @@ public abstract class BaseToolbarActivity extends SupportActivity {
         setHeadTitle(0, getString(titleStr));
     }
 
+    public void setHeadTitle(String titleStr) {
+        setHeadTitle(0, titleStr);
+    }
+
     /**
      * 设置头部背景颜色,头部标题
      *

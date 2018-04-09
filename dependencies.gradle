@@ -42,6 +42,8 @@ ext {
     rxjava = "2.1.12"
     //https://github.com/ReactiveX/RxAndroid
     rxandroid = "2.0.2"
+    //https://github.com/CymChad/BaseRecyclerViewAdapterHelper
+    rvadapterVer = "2.9.37"
 
     androidDependencies = [
             recyclerView     : "com.android.support:recyclerview-v7:${supportyLibVer}",
@@ -63,6 +65,7 @@ ext {
             gson                : "com.google.code.gson:gson:${gsonVer}",
             andPermission       : "com.yanzhenjie:permission:${andPermissionVer}",
             fragmentation       : "me.yokeyword:fragmentation:${fragmentationVer}",
+            rvadapterHelper     : "com.github.CymChad:BaseRecyclerViewAdapterHelper:${rvadapterVer}",
             aliyunHotfix        : "com.aliyun.ams:alicloud-android-hotfix:${aliyunHotfixVer}",
             utilCode            : "com.blankj:utilcode:${utilCodeVer}",
             rxjava              : "io.reactivex.rxjava2:rxjava:${rxjava}",

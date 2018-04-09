@@ -1,4 +1,4 @@
-package com.zhangw.aliencat.ui.main;
+package com.zhangw.aliencat.ui.test;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,6 +6,7 @@ import android.widget.Button;
 
 import com.zhangw.aliencat.R;
 import com.zhangw.aliencat.base.BaseActivity;
+import com.zhangw.aliencat.base.BaseFragment;
 import com.zhangw.aliencat.widgets.PView;
 
 import butterknife.BindView;
@@ -15,7 +16,7 @@ import butterknife.OnClick;
  * @author zhangw
  * @date 2018/3/23.
  */
-public class MainActivity extends BaseActivity {
+public class TestViewFragment extends BaseFragment {
 
     @BindView(R.id.point)
     Button mPoint;
@@ -38,14 +39,23 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.view)
     PView mPView;
 
+    public static TestViewFragment newInstance() {
+
+        Bundle args = new Bundle();
+
+        TestViewFragment fragment = new TestViewFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public int getLayoutId(Bundle savedInstanceState) {
-        return R.layout.activity_main;
+        return R.layout.fragment_testview;
     }
 
     @Override
     public void initEnv() {
-        showHead(false, false);
+
     }
 
     @OnClick({R.id.point, R.id.points, R.id.line, R.id.lines, R.id.drawRect, R.id.drawOval, R.id.drawRoundRect, R.id.drawCircle, R.id.drawArc, R.id.clear})
