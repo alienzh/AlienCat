@@ -34,6 +34,7 @@ public class GsonRequest<T> extends Request<T> {
     protected Response<T> parseNetworkResponse(NetworkResponse response) {
         try {
             String parsed = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+            parsed = new String(parsed.getBytes( "UTF-8"));
             return Response.success(gson.fromJson(parsed,clz),HttpHeaderParser.parseCacheHeaders(response));
         } catch (UnsupportedEncodingException e) {
             return Response.error(new ParseError());

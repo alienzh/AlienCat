@@ -28,8 +28,11 @@ import com.zhangw.aliencat.ui.test.volloy.BitmapCache;
 import com.zhangw.aliencat.ui.test.volloy.GsonRequest;
 import com.zhangw.aliencat.ui.test.volloy.Weather;
 import com.zhangw.aliencat.ui.test.volloy.WeatherInfo;
+import com.zhangw.aliencat.ui.test.volloy.XMLRequest;
 
 import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +58,7 @@ public class TestVolleyActivity extends BaseActivity {
     private String jsonUrl = "http://www.weather.com.cn/data/sk/101010100.html";
     private String imageUrl = "https://tse1-mm.cn.bing.net/th?id=OIP.D-L1Rd2isVSBkzTkmBusXAHaEo&p=0&o=5&pid=1.1";
     private String weatherUrl = "http://www.weather.com.cn/data/sk/101010100.html";
+    private String xmlUrl = "http://flash.weather.com.cn/wmaps/xml/china.xml";
 
     private BaseQuickAdapter<String, BaseViewHolder> mQuickAdapter;
 
@@ -76,6 +80,7 @@ public class TestVolleyActivity extends BaseActivity {
         data.add("ImageLoaderCache");
         data.add("networkImage");
         data.add("gsonRequest");
+        data.add("xmlRequest");
 
         rvVolley.setLayoutManager(new LinearLayoutManager(this));
         mQuickAdapter = new BaseQuickAdapter<String, BaseViewHolder>(R.layout.support_simple_spinner_dropdown_item, data) {
@@ -118,6 +123,9 @@ public class TestVolleyActivity extends BaseActivity {
                         break;
                     case "gsonRequest":
                         gsonRequest();
+                        break;
+                    case "xmlRequest":
+                        xmlRequest();
                         break;
                     default:
                         break;
@@ -186,6 +194,7 @@ public class TestVolleyActivity extends BaseActivity {
         ImageRequest request = new ImageRequest(imageUrl, new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
+                ToastUtils.showLong("volleySuccess");
                 image.setImageBitmap(response);
             }
         }, 0, 0, ImageView.ScaleType.FIT_CENTER, Bitmap.Config.RGB_565, new Response.ErrorListener() {
@@ -234,7 +243,44 @@ public class TestVolleyActivity extends BaseActivity {
         GsonRequest<Weather> request = new GsonRequest<Weather>(weatherUrl, Weather.class, new Response.Listener<Weather>() {
             @Override
             public void onResponse(Weather response) {
+                ToastUtils.showLong("volleySuccess");
                 LogUtils.dTag(TAG, response.getWeatherinfo().toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                ToastUtils.showLong("volleyError");
+
+                LogUtils.eTag(TAG, error.getMessage(), error);
+            }
+        });
+        queue.add(request);
+    }
+
+    private void xmlRequest() {
+        RequestQueue queue = Volley.newRequestQueue(this);
+        XMLRequest request = new XMLRequest(xmlUrl, new Response.Listener<XmlPullParser>() {
+            @Override
+            public void onResponse(XmlPullParser response) {
+                ToastUtils.showLong("volleySuccess");
+                LogUtils.dTag(TAG, response.toString());
+                try {
+                    int eventType = response.getEventType();
+                    while (eventType != XmlPullParser.END_DOCUMENT) {
+                        switch (eventType) {
+                            case XmlPullParser.START_TAG:
+                                if ("city".equals(response.getName())) {
+
+                                    LogUtils.dTag(TAG, response.getAttributeName(0));
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
