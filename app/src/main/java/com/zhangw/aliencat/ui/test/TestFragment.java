@@ -45,8 +45,11 @@ public class TestFragment extends BaseFragment {
         List<String> data = new ArrayList<>();
         data.add("view");
         data.add("volley");
-        data.add("network state");
+        data.add("networkState");
         data.add("screenRotation");
+        data.add("viewClick");
+        data.add("aidl");
+        data.add("permission");
         data.add("...");
 
         rvTest.setLayoutManager(new LinearLayoutManager(_mActivity));
@@ -75,11 +78,20 @@ public class TestFragment extends BaseFragment {
                     case "volley":
                         ActivityUtils.startActivity(TestVolleyActivity.class);
                         break;
-                    case "network state":
+                    case "networkState":
                         ActivityUtils.startActivity(NetworkStateActivity.class);
                         break;
                     case "screenRotation":
                         ActivityUtils.startActivity(ScreenRotationActivity.class);
+                        break;
+                    case "viewClick":
+                        ActivityUtils.startActivity(TestViewClickActivity.class);
+                        break;
+                    case "aidl":
+                        ActivityUtils.startActivity(TestAidlActivity.class);
+                        break;
+                    case "permission":
+                        ActivityUtils.startActivity(TestPermissionActivity.class);
                         break;
                     default:
                         break;

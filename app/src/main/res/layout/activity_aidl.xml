@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.test.ScreenRotationActivity">
+
+    <Button
+        android:id="@+id/bindService"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="BindService" />
+
+    <Button
+        android:id="@+id/unbindService"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="UnbindService" />
+
+    <Button
+        android:id="@+id/addInvoked"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="12+12" />
+
+    <Button
+        android:id="@+id/minInvoked"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="50-12" />
+</LinearLayout>
