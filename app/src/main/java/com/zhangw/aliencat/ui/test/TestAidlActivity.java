@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.zhangw.aliencat.ui.service.CalService;
 import com.zhangw.aliencat.IMyAidlInterface;
 import com.zhangw.aliencat.R;
 import com.zhangw.aliencat.base.BaseActivity;
@@ -57,14 +58,15 @@ public class TestAidlActivity extends BaseActivity {
 
     @Override
     public void initEnv() {
-
+        showHead(true, true);
+        setHeadTitle("AIDL");
     }
 
     @OnClick({R.id.bindService, R.id.unbindService, R.id.addInvoked, R.id.minInvoked})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bindService:
-                Intent intent = new Intent();
+                Intent intent = new Intent(this, CalService.class);
                 intent.setAction("com.zhangw.alient.aidl.calc");
                 bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
                 break;

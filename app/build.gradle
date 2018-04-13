@@ -11,8 +11,9 @@ repositories {
 android {
     def globalConfig = rootProject.extensions.getByName("ext")
 
-    compileSdkVersion 26
+    compileSdkVersion globalConfig.androidCompileSdkVer
     buildToolsVersion globalConfig.androidBuildToolsVer
+//    buildToolsVersion '27.0.0'
 
     defaultConfig {
         applicationId "com.zhangw.aliencat"
@@ -42,6 +43,7 @@ dependencies {
     def androidDependencies = rootProject.ext.androidDependencies
     def viewDependencies = rootProject.ext.viewDependencies
     implementation androidDependencies.appcompat_v7
+//    implementation 'com.android.support:recyclerview-v7:27.0.0'
     implementation androidDependencies.recyclerView
     implementation androidDependencies.support_v4
     implementation androidDependencies.design
@@ -49,8 +51,6 @@ dependencies {
 //    implementation viewDependencies.leakcanary
 //    implementation viewDependencies.leakcanaryRelease
     implementation viewDependencies.butterknife
-    //3.0 需要添加
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     annotationProcessor viewDependencies.butterknifeProcessor
     implementation viewDependencies.glide
     //annotationProcessor viewDependencies.glideProcessor

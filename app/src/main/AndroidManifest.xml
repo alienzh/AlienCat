@@ -75,7 +75,7 @@
         <activity android:name=".ui.test.TestPermissionActivity" />
 
         <service
-            android:name=".CalService"
+            android:name=".ui.service.CalService"
             android:enabled="true"
             android:exported="true">
 
