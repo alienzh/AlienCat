@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--视频背景-->
+    <ImageView
+        android:id="@+id/ivVideoBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:contentDescription="@string/bg"
+        android:scaleType="centerCrop" />
+
+    <!--视频暂停-->
+    <ImageButton
+        android:id="@+id/ibVideoPause"
+        android:layout_width="@dimen/video_playButton_size"
+        android:layout_height="@dimen/video_playButton_size"
+        android:layout_gravity="center"
+        android:background="@drawable/video_play_anim_0"
+        android:contentDescription="@string/pause"
+        android:visibility="visible" />
+
+    <!--视频加载-->
+    <ProgressBar
+        android:id="@+id/pbVideoLoading"
+        style="@style/NewVideoLoadingStyle"
+        android:layout_width="@dimen/video_playButton_size"
+        android:layout_height="@dimen/video_playButton_size"
+        android:layout_gravity="center"
+        android:visibility="invisible" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/fl_operation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_img_top_mask"
+        android:paddingEnd="0dp"
+        android:paddingStart="10dp">
+
+        <!--返回键，全屏显示-->
+        <ImageView
+            android:id="@+id/ivVideoBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/back"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:paddingTop="12dp"
+            android:src="@drawable/video_back_white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <!--视频描述 -->
+        <TextView
+            android:id="@+id/tvVideoDes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="12dp"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:lineSpacingExtra="9dp"
+            android:maxLines="2"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@+id/ivVideoBack"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivVideoBack" />
+
+        <!--学习人数-->
+        <TextView
+            android:id="@+id/tvVideoLearnCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="9dp"
+            android:textColor="@color/white_transparency_70"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@+id/tvVideoDes" />
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>

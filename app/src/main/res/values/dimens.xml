@@ -8,4 +8,8 @@
     <dimen name="size20">20sp</dimen>
     <dimen name="size22">22sp</dimen>
     <dimen name="size24">24sp</dimen>
+    <!--视频暂停/播放/加载大小-->
+    <dimen name="video_playButton_size">42dp</dimen>
+    <!--视频加载-->
+    <dimen name="video_loadingSize">35dp</dimen>
 </resources>

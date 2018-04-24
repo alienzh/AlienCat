@@ -2,18 +2,11 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-repositories {
-    maven {
-        url "http://maven.aliyun.com/nexus/content/repositories/releases"
-    }
-}
-
 android {
     def globalConfig = rootProject.extensions.getByName("ext")
 
     compileSdkVersion globalConfig.androidCompileSdkVer
     buildToolsVersion globalConfig.androidBuildToolsVer
-//    buildToolsVersion '27.0.0'
 
     defaultConfig {
         applicationId "com.zhangw.aliencat"
@@ -22,6 +15,11 @@ android {
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a"
+        }
     }
     buildTypes {
         release {
@@ -29,13 +27,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+
+    dexOptions {
+        jumboMode true
+        javaMaxHeapSize "4g"
     }
-    defaultConfig {
-        multiDexEnabled true
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
     }
 }
+
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -43,7 +47,6 @@ dependencies {
     def androidDependencies = rootProject.ext.androidDependencies
     def viewDependencies = rootProject.ext.viewDependencies
     implementation androidDependencies.appcompat_v7
-//    implementation 'com.android.support:recyclerview-v7:27.0.0'
     implementation androidDependencies.recyclerView
     implementation androidDependencies.support_v4
     implementation androidDependencies.design
@@ -53,15 +56,17 @@ dependencies {
     implementation viewDependencies.butterknife
     annotationProcessor viewDependencies.butterknifeProcessor
     implementation viewDependencies.glide
-    //annotationProcessor viewDependencies.glideProcessor
+    annotationProcessor viewDependencies.glideProcessor
     implementation viewDependencies.volley
     implementation viewDependencies.litepal
     implementation viewDependencies.gson
     implementation viewDependencies.andPermission
     implementation viewDependencies.fragmentation
     implementation viewDependencies.rvadapterHelper
-    implementation viewDependencies.aliyunHotfix
     implementation viewDependencies.utilCode
     implementation viewDependencies.rxjava
     implementation viewDependencies.rxandroid
+
+    //腾讯云视频播放器
+    implementation(name: 'LiteAVSDK_Player_4.5.4021', ext: 'aar')
 }

@@ -9,4 +9,15 @@
     <string name="home_test">测试</string>
     <string name="home_tool">工具</string>
     <string name="home">首页</string>
+
+    <string name="bg">background</string>
+    <string name="overflow">Overflow</string>
+    <string name="fullscreen_button">Fullscreen</string>
+    <string name="time_duration">Duration</string>
+    <string name="seekbar">Seekbar</string>
+    <string name="time_current">Current time</string>
+    <string name="pause">Pause</string>
+    <string name="replay">Replay</string>
+    <string name="video_mute">videoMute</string>
+    <string name="back">返回</string>
 </resources>

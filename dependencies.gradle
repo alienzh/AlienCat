@@ -1,7 +1,6 @@
 allprojects {
     repositories {
         jcenter()
-        mavenCentral()
         maven { url 'https://jitpack.io' }
     }
 }
@@ -9,11 +8,11 @@ allprojects {
 ext {
     //Android
     androidCompileSdkVer = 27
-    androidBuildToolsVer = "27.0.2"
+    androidBuildToolsVer = "27.0.3"
     androidMinSdkVer = 19
     androidTargetVer = 27
 
-    supportyLibVer = "27.0.2"
+    supportyLibVer = "27.1.1"
     constraintLayoutVer = "1.0.2"
 
     //检测内存溢出 https://github.com/square/leakcanary
@@ -35,8 +34,6 @@ ext {
     //https://github.com/YoKeyword/Fragmentation
     fragmentationVer = "1.3.3"
     //https://help.aliyun.com/product/51340.html
-    aliyunHotfixVer = "3.2.0"
-    //https://github.com/Blankj/AndroidUtilCode/blob/master/utilcode/README-CN.md
     utilCodeVer = "1.13.5"
     //https://github.com/ReactiveX/RxJava
     rxjava = "2.1.12"
@@ -66,7 +63,6 @@ ext {
             andPermission       : "com.yanzhenjie:permission:${andPermissionVer}",
             fragmentation       : "me.yokeyword:fragmentation:${fragmentationVer}",
             rvadapterHelper     : "com.github.CymChad:BaseRecyclerViewAdapterHelper:${rvadapterVer}",
-            aliyunHotfix        : "com.aliyun.ams:alicloud-android-hotfix:${aliyunHotfixVer}",
             utilCode            : "com.blankj:utilcode:${utilCodeVer}",
             rxjava              : "io.reactivex.rxjava2:rxjava:${rxjava}",
             rxandroid           : "io.reactivex.rxjava2:rxandroid:${rxandroid}"
