@@ -58,6 +58,12 @@ public interface IVideoPlayerListener {
     void onResume();
 
     /**
+     * 恢复暂停状态
+     * @param seek 是否产生seek动作
+     */
+    void onResume(boolean seek);
+
+    /**
      * 拖动加载完成
      */
     void onSeekCompleted();
@@ -66,4 +72,9 @@ public interface IVideoPlayerListener {
      * 网络错误播放停止
      */
     void onNetStatus(int status);
+
+    /**
+     * 退出全屏
+     */
+    void onBackFullscreen();
 }

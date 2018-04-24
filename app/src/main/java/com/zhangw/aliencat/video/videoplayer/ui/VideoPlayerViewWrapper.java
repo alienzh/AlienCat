@@ -10,7 +10,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.tencent.rtmp.TXLiveConstants;
 import com.zhangw.aliencat.video.videoplayer.IVideoPlayerListener;
 import com.zhangw.aliencat.video.videoplayer.PlayState;
-import com.zhangw.aliencat.video.videoplayer.VideoPlayerManager;
+import com.zhangw.aliencat.video.videoplayer.KyVideoManager;
 
 import java.util.TimerTask;
 import java.util.concurrent.ScheduledExecutorService;
@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
  */
 public class VideoPlayerViewWrapper extends VideoPlayerControlView implements IVideoPlayerListener {
 
-    protected VideoPlayerManager mVideoPlayerManager;
+    protected KyVideoManager mVideoPlayerManager;
     /**
      * 播放十秒事件
      */
@@ -53,7 +53,7 @@ public class VideoPlayerViewWrapper extends VideoPlayerControlView implements IV
     public void initView() {
         ButterKnife.bind(this);
         super.initView();
-        mVideoPlayerManager = VideoPlayerManager.getInstance();
+        mVideoPlayerManager = KyVideoManager.instance();
         setListVideoView();
     }
 
@@ -66,7 +66,7 @@ public class VideoPlayerViewWrapper extends VideoPlayerControlView implements IV
 
     @Override
     public void toggleMuteSetting(boolean isMute) {
-        VideoPlayerManager.getInstance().audioToggle(isMute);
+        KyVideoManager.instance().audioToggle(isMute);
     }
 
     @Override
@@ -101,7 +101,7 @@ public class VideoPlayerViewWrapper extends VideoPlayerControlView implements IV
     @Override
     public void startPlay() {
         if (null == mVideoPlayerManager) {
-            mVideoPlayerManager = VideoPlayerManager.getInstance();
+            mVideoPlayerManager = KyVideoManager.instance();
         }
         mVideoPlayerManager.saveLastVideoPlayPosition();
         mVideoPlayerManager.setIMediaPlayerListener(this);
@@ -110,7 +110,7 @@ public class VideoPlayerViewWrapper extends VideoPlayerControlView implements IV
 
     @Override
     public void resumePlay() {
-        VideoPlayerManager.getInstance().resumePlay();
+        KyVideoManager.instance().resumePlay();
     }
 
     @Override

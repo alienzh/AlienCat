@@ -7,9 +7,9 @@ import org.litepal.crud.DataSupport;
  * @date 2018/4/4.
  */
 public class PieData extends DataSupport{
-    
+
     private String sort;
     private float value;
     private float percentage;
-    
+
 }

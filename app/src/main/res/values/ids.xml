@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--视频 ItemViewHolder-->
+    <item name="video_full_id" type="id" >0XAA</item>>
+</resources>

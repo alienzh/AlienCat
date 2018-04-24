@@ -217,7 +217,7 @@ public abstract class VideoPlayerStateView extends BaseVideoPlayerView{
             pausePlayer();
         }
         if (state != PlayState.COMPLETE) {
-            setState(shouldPlay ? PlayState.PLAY : PlayState.PAUSE);
+            setState(shouldPlay ? PlayState.READY : PlayState.PAUSE);
         }
     }
 
