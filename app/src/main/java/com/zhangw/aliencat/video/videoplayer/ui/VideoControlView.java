@@ -252,8 +252,9 @@ public abstract class VideoControlView extends VideoPlayerStateView implements V
             resolveThumbImage(mThumbImageView);
         }
 
-        if (mBackButton != null)
+        if (mBackButton != null){
             mBackButton.setOnClickListener(this);
+        }
 
 //        if (mLockScreen != null) {
 //            mLockScreen.setVisibility(GONE);
@@ -527,8 +528,9 @@ public abstract class VideoControlView extends VideoPlayerStateView implements V
         if (mChangePosition) {
             int duration = getDuration();
             int progress = mSeekTimePosition * 100 / (duration == 0 ? 1 : duration);
-            if (mBottomProgressBar != null)
+            if (mBottomProgressBar != null){
                 mBottomProgressBar.setProgress(progress);
+            }
         }
         if (!mChangePosition && !mChangeVolume && !mBrightness) {
             onClickUiToggle();
