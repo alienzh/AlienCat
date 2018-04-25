@@ -71,16 +71,5 @@
             app:layout_constraintLeft_toRightOf="@+id/ivVideoBack"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@+id/ivVideoBack" />
-
-        <!--学习人数-->
-        <TextView
-            android:id="@+id/tvVideoLearnCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="9dp"
-            android:textColor="@color/white_transparency_70"
-            android:visibility="visible"
-            app:layout_constraintTop_toBottomOf="@+id/tvVideoDes" />
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>

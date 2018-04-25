@@ -3,7 +3,9 @@ package com.zhangw.aliencat.video.videoplayer;
 import android.os.Bundle;
 
 /**
- * Created by chends on 2018/3/23.
+ * @author chends
+ * @date 2018/3/23.
+ * 视频回调
  */
 public interface IVideoPlayerListener {
 
@@ -28,11 +30,6 @@ public interface IVideoPlayerListener {
     void onStart();
 
     /**
-     * 正在播放
-     */
-    void onPlaying();
-
-    /**
      * 播放进度
      */
     void onPlayingProgress(Bundle bundle);
@@ -41,11 +38,6 @@ public interface IVideoPlayerListener {
      * 播放暂停
      */
     void onPause();
-
-    /**
-     * 播放停止
-     */
-    void onStop();
 
     /**
      * 播放完成
@@ -59,6 +51,7 @@ public interface IVideoPlayerListener {
 
     /**
      * 恢复暂停状态
+     *
      * @param seek 是否产生seek动作
      */
     void onResume(boolean seek);
@@ -69,12 +62,23 @@ public interface IVideoPlayerListener {
     void onSeekCompleted();
 
     /**
-     * 网络错误播放停止
-     */
-    void onNetStatus(int status);
-
-    /**
      * 退出全屏
      */
     void onBackFullscreen();
+
+    /**
+     * 播放错误
+     *
+     * @param what
+     * @param extra
+     */
+    void onError(int what, int extra);
+
+    /**
+     * 播放信息
+     *
+     * @param what
+     * @param extra
+     */
+    void onInfo(int what, int extra);
 }

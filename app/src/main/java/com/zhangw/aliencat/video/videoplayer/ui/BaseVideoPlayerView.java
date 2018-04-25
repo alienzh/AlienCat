@@ -19,7 +19,8 @@ import com.tencent.rtmp.ui.TXCloudVideoView;
 
 public abstract class BaseVideoPlayerView extends FrameLayout {
 
-    private TXCloudVideoView mTXCloudVideoView;
+    protected static final String LOG_TAG = "KyVideoPlayer";
+    protected TXCloudVideoView mTXCloudVideoView;
     protected LayoutParams mLayoutParams;
     protected Context mContext;
     protected LayoutInflater mLayoutInflater;

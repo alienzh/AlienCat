@@ -45,9 +45,10 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by chends on 2018/3/26.
+ * @author chends
+ * @date 2018/3/26.
+ * 播放UI的显示、控制层、手势处理等
  */
-
 public abstract class VideoPlayerControlView extends VideoPlayerStateView {
 
     public static final String TAG = "VideoPlayerControlView";
@@ -516,11 +517,6 @@ public abstract class VideoPlayerControlView extends VideoPlayerStateView {
         }
     }
 
-    @Override
-    public void shareVideo(String platform) {
-
-    }
-
     /**
      * 提示网络变化
      *
@@ -537,6 +533,11 @@ public abstract class VideoPlayerControlView extends VideoPlayerStateView {
         if (null != mVideoListEventListener) {
             mVideoListEventListener.onPlayStateChange(state, mPosition);
         }
+    }
+
+    @Override
+    public void shareVideo(String platform) {
+
     }
 
     public void show(int timeout) {
@@ -881,4 +882,57 @@ public abstract class VideoPlayerControlView extends VideoPlayerStateView {
         }
     }
 
+    public void setState(int state) {
+        this.mCurrentState = state;
+        setKeepScreenOn(state == PlayState.LOADING || state == PlayState.PLAY);
+        String stateStr = "";
+        switch (state) {
+            case PlayState.READY:
+                ibVideoPause.setVisibility(GONE);
+                pbVideoLoading.setVisibility(VISIBLE);
+                ibVideoPause.setVisibility(GONE);
+                break;
+
+            case PlayState.LOADING:
+                stateStr = "加载";
+                ibVideoPause.setVisibility(GONE);
+                pbVideoLoading.setVisibility(VISIBLE);
+                showNetPromptDialog(false, false);
+                break;
+
+            case PlayState.PLAY:
+                stateStr = "播放";
+                pbVideoLoading.setVisibility(GONE);
+                showNetPromptDialog(false, false);
+                getTXCloudVideoView().setVisibility(VISIBLE);
+                setLoadingAnim(false);
+                ivVideoBackground.setVisibility(GONE);
+                break;
+
+            case PlayState.PAUSE:
+                stateStr = "暂停";
+                ibVideoPause.setVisibility(VISIBLE);
+                pbVideoLoading.setVisibility(GONE);
+                setLoadingAnim(false);
+                break;
+
+            case PlayState.STOP:
+                ivVideoBackground.setVisibility(VISIBLE);
+                break;
+
+            case PlayState.RELEASE:
+                stateStr = "释放";
+                break;
+
+            case PlayState.COMPLETE:
+                stateStr = "播放完成";
+                ibVideoPause.setVisibility(GONE);
+                break;
+
+            default:
+                break;
+        }
+//        LogUtil.i(TAG, "视频播放状态 = " + stateStr + ";videoId=");
+        updateState(state);
+    }
 }
