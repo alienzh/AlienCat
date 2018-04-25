@@ -1,4 +1,4 @@
-package com.zhangw.aliencat.video.videoplayer;
+package com.zhangw.aliencat.video.videoplayer.listener;
 
 /**
  * Created by chends on 2018/1/15.

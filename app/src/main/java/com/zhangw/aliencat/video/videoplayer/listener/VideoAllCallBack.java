@@ -1,4 +1,4 @@
-package com.zhangw.aliencat.video.videoplayer;
+package com.zhangw.aliencat.video.videoplayer.listener;
 
 /**
  * Created by Nathen，参考jiecao结构，在其基础上修改

@@ -1,4 +1,4 @@
-package com.zhangw.aliencat.video.videoplayer;
+package com.zhangw.aliencat.video.videoplayer.listener;
 
 import android.os.Bundle;
 
@@ -33,6 +33,8 @@ public interface IVideoPlayerListener {
      * 播放进度
      */
     void onPlayingProgress(Bundle bundle);
+
+    void onBufferingUpdate(int percent);
 
     /**
      * 播放暂停

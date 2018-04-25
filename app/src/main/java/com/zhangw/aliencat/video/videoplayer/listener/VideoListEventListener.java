@@ -1,4 +1,4 @@
-package com.zhangw.aliencat.video.videoplayer;
+package com.zhangw.aliencat.video.videoplayer.listener;
 
 /**
  * 回调播放状态给视频列表

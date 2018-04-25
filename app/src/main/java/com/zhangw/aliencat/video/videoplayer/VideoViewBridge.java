@@ -5,6 +5,7 @@ import android.os.Message;
 
 import com.tencent.rtmp.TXVodPlayer;
 import com.tencent.rtmp.ui.TXCloudVideoView;
+import com.zhangw.aliencat.video.videoplayer.listener.IVideoPlayerListener;
 
 /**
  * @author zhangw

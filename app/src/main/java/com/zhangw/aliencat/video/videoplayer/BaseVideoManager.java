@@ -11,6 +11,7 @@ import com.tencent.rtmp.TXLiveConstants;
 import com.tencent.rtmp.TXVodPlayConfig;
 import com.tencent.rtmp.TXVodPlayer;
 import com.tencent.rtmp.ui.TXCloudVideoView;
+import com.zhangw.aliencat.video.videoplayer.listener.IVideoPlayerListener;
 
 import java.lang.ref.WeakReference;
 
@@ -151,7 +152,6 @@ public abstract class BaseVideoManager implements ITXVodPlayListener,VideoViewBr
         HandlerThread mediaHandlerThread = new HandlerThread(TAG);
         mediaHandlerThread.start();
     }
-
 
     @Override
     public void initVideoPlayer(Context context, Message msg,TXCloudVideoView txCloudVideoView) {

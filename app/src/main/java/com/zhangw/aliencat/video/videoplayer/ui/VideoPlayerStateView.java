@@ -2,6 +2,7 @@ package com.zhangw.aliencat.video.videoplayer.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.AudioManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -16,9 +17,8 @@ import com.blankj.utilcode.util.LogUtils;
 import com.zhangw.aliencat.R;
 import com.zhangw.aliencat.video.CommonUtil;
 import com.zhangw.aliencat.video.NetInfoModule;
-import com.zhangw.aliencat.video.videoplayer.IVideoPlayerListener;
-import com.zhangw.aliencat.video.videoplayer.PlayState;
-import com.zhangw.aliencat.video.videoplayer.VideoAllCallBack;
+import com.zhangw.aliencat.video.videoplayer.listener.IVideoPlayerListener;
+import com.zhangw.aliencat.video.videoplayer.listener.VideoAllCallBack;
 import com.zhangw.aliencat.video.videoplayer.VideoViewBridge;
 
 import butterknife.BindView;
@@ -29,6 +29,21 @@ import butterknife.BindView;
  * 视频回调与状态处理等相关层
  */
 public abstract class VideoPlayerStateView extends BaseVideoPlayerView implements IVideoPlayerListener {
+
+    //正常
+    public static final int STATE_NORMAL = 0xF0;
+    //预备中
+    public static final int STATE_PREPAREING = 0xF1;
+    //播放中
+    public static final int STATE_PLAYING = 0xF2;
+    //开始缓存
+    public static final int STATE_BUFFERING_START = 0xF3;
+    //暂停
+    public static final int STATE_PAUSE = 0XF4;
+    //自动播放结束
+    public static final int STATE_AUTO_COMPLETE = 0xF5;
+    //错误状态
+    public static final int STATE_ERROR = 0XF6;
 
     /**
      * 避免切换时频繁
@@ -89,10 +104,20 @@ public abstract class VideoPlayerStateView extends BaseVideoPlayerView implement
      * 当前的播放位置
      */
     protected long mCurrentPosition;
+
+    /**
+     * 是否播放过
+     */
+    protected boolean mHadPlay = false;
+    //是否播放器当失去音频焦点
+    protected boolean mReleaseWhenLossAudio = true;
+
+    //音频焦点的监听
+    protected AudioManager mAudioManager;
     /**
      * 当前是否全屏
      */
-    protected boolean mIsFullscreen = false;
+    protected boolean mIfCurrentIsFullscreen = false;
     /**
      * 是否准备完成前调用了暂停
      */
@@ -125,6 +150,12 @@ public abstract class VideoPlayerStateView extends BaseVideoPlayerView implement
      * 网络状态
      */
     protected String mNetSate = "NORMAL";
+    //屏幕宽度
+    protected int mScreenWidth;
+
+    //屏幕高度
+    protected int mScreenHeight;
+
     /**
      * 视频回调
      */
@@ -133,7 +164,41 @@ public abstract class VideoPlayerStateView extends BaseVideoPlayerView implement
      * 网络监听
      */
     protected NetInfoModule mNetInfoModule;
-
+    /**
+     * 监听是否有外部其他多媒体开始播放
+     */
+    protected AudioManager.OnAudioFocusChangeListener onAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
+        @Override
+        public void onAudioFocusChange(int focusChange) {
+            switch (focusChange) {
+                case AudioManager.AUDIOFOCUS_GAIN:
+                    break;
+                case AudioManager.AUDIOFOCUS_LOSS:
+                    post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (mReleaseWhenLossAudio) {
+                                releaseVideos();
+                            } else {
+                                onPause();
+                            }
+                        }
+                    });
+                    break;
+                case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+                    try {
+                        onPause();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     public VideoPlayerStateView(@NonNull Context context) {
         super(context);
@@ -141,7 +206,15 @@ public abstract class VideoPlayerStateView extends BaseVideoPlayerView implement
     }
 
     private void inflateView() {
+        mScreenWidth = getActivityContext().getResources().getDisplayMetrics().widthPixels;
+        mScreenHeight = getActivityContext().getResources().getDisplayMetrics().heightPixels;
+        mAudioManager = (AudioManager) getActivityContext().getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+
         mLayoutInflater.inflate(R.layout.videoplayer_state_view, this);
+    }
+
+    protected Context getActivityContext() {
+        return CommonUtil.getActivityContext(getContext());
     }
 
     public VideoPlayerStateView(@NonNull Context context, @Nullable AttributeSet attrs) {
@@ -194,14 +267,21 @@ public abstract class VideoPlayerStateView extends BaseVideoPlayerView implement
      */
     public abstract void replayPlay();
 
+    /************************* 需要继承处理部分 *************************/
+
+    /**
+     * 是否全屏
+     */
+    public boolean isIfCurrentIsFullscreen() {
+        return mIfCurrentIsFullscreen;
+    }
+
     /**
      * 退出全屏
      *
      * @return 是否在全屏界面
      */
     protected abstract boolean backFromFull(Context context);
-
-    /************************* 需要继承处理部分 *************************/
 
     /**
      * 当前UI
@@ -210,7 +290,7 @@ public abstract class VideoPlayerStateView extends BaseVideoPlayerView implement
 
     @Override
     public void onPrepared() {
-        if (mCurrentState != PlayState.STATE_PREPAREING) {
+        if (mCurrentState != STATE_PREPAREING) {
             return;
         }
         mHadPrepared = true;
@@ -221,7 +301,7 @@ public abstract class VideoPlayerStateView extends BaseVideoPlayerView implement
         }
 
         if (!mStartAfterPrepared) {
-            setStateAndUi(PlayState.STATE_PAUSE);
+            setStateAndUi(STATE_PAUSE);
             return;
         }
 
@@ -253,7 +333,7 @@ public abstract class VideoPlayerStateView extends BaseVideoPlayerView implement
                 getVideoManager().getMediaPlayer().resume();
             }
 
-            setStateAndUi(PlayState.STATE_PLAYING);
+            setStateAndUi(STATE_PLAYING);
 
             if (getVideoManager().getMediaPlayer() != null && mSeekOnStart > 0) {
                 getVideoManager().getMediaPlayer().seek(mSeekOnStart);
@@ -319,22 +399,18 @@ public abstract class VideoPlayerStateView extends BaseVideoPlayerView implement
         }
     }
 
-    protected Context getActivityContext() {
-        return CommonUtil.getActivityContext(getContext());
-    }
-
     /**
      * 暂停状态
      */
     @Override
     public void onPause() {
-        if (mCurrentState == PlayState.STATE_PREPAREING) {
+        if (mCurrentState == STATE_PREPAREING) {
             mPauseBeforePrepared = true;
         }
         try {
             if (getVideoManager().getMediaPlayer() != null &&
                     getVideoManager().getMediaPlayer().isPlaying()) {
-                setStateAndUi(PlayState.STATE_PAUSE);
+                setStateAndUi(STATE_PAUSE);
                 mCurrentPosition = (long) getVideoManager().getMediaPlayer().getCurrentPlaybackTime();
                 if (getVideoManager().getMediaPlayer() != null) {
                     getVideoManager().getMediaPlayer().pause();
@@ -343,6 +419,31 @@ public abstract class VideoPlayerStateView extends BaseVideoPlayerView implement
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onCompleted() {
+        //make me normal first
+        setStateAndUi(STATE_NORMAL);
+
+        mSaveChangeViewTIme = 0;
+
+//        if (mTextureViewContainer.getChildCount() > 0) {
+//            mTextureViewContainer.removeAllViews();
+//        }
+
+        if (!mIfCurrentIsFullscreen) {
+            getVideoManager().setListener(null);
+            getVideoManager().setLastListener(null);
+        }
+//        getVideoManager().setCurrentVideoHeight(0);
+//        getVideoManager().setCurrentVideoWidth(0);
+
+        mAudioManager.abandonAudioFocus(onAudioFocusChangeListener);
+        ((Activity) getActivityContext()).getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        releaseNetWorkState();
+
     }
 
     /**
@@ -361,23 +462,28 @@ public abstract class VideoPlayerStateView extends BaseVideoPlayerView implement
     @Override
     public void onResume(boolean seek) {
         mPauseBeforePrepared = false;
-        if (mCurrentState == PlayState.STATE_PAUSE) {
+        if (mCurrentState == STATE_PAUSE) {
             try {
                 if (mCurrentPosition > 0 && getVideoManager().getMediaPlayer() != null) {
                     if (seek) {
                         getVideoManager().getMediaPlayer().seek(mCurrentPosition);
                     }
                     getVideoManager().getMediaPlayer().resume();
-                    setStateAndUi(PlayState.STATE_PLAYING);
-//                    if (mAudioManager != null && !mReleaseWhenLossAudio) {
-//                        mAudioManager.requestAudioFocus(onAudioFocusChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
-//                    }
+                    setStateAndUi(STATE_PLAYING);
+                    if (mAudioManager != null && !mReleaseWhenLossAudio) {
+                        mAudioManager.requestAudioFocus(onAudioFocusChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+                    }
                     mCurrentPosition = 0;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void onSeekCompleted() {
+
     }
 
     @Override
@@ -393,7 +499,7 @@ public abstract class VideoPlayerStateView extends BaseVideoPlayerView implement
         }
 
         if (what != 38 && what != -38) {
-            setStateAndUi(PlayState.STATE_ERROR);
+            setStateAndUi(STATE_ERROR);
 //            deleteCacheFileWhenError();
             if (mVideoAllCallBack != null) {
                 mVideoAllCallBack.onPlayError(mOriginUrl, mTitle, this);
@@ -418,23 +524,11 @@ public abstract class VideoPlayerStateView extends BaseVideoPlayerView implement
     }
 
     /**
-     * 播放错误的时候，删除缓存文件
-     */
-    protected void deleteCacheFileWhenError() {
-//        clearCurrentCache();
-//        Debuger.printfError("Link Or mCache Error, Please Try Again " + mOriginUrl);
-//        if (mCache) {
-//            Debuger.printfError("mCache Link " + mUrl);
-//        }
-//        mUrl = mOriginUrl;
-    }
-
-    /**
      * 获取当前播放进度
      */
     public int getCurrentPositionWhenPlaying() {
         int position = 0;
-        if (mCurrentState == PlayState.STATE_PLAYING || mCurrentState == PlayState.STATE_PAUSE) {
+        if (mCurrentState == STATE_PLAYING || mCurrentState == STATE_PAUSE) {
             try {
                 position = (int) getVideoManager().getMediaPlayer().getCurrentPlaybackTime();
             } catch (Exception e) {
@@ -488,37 +582,28 @@ public abstract class VideoPlayerStateView extends BaseVideoPlayerView implement
 //        }
     }
 
-    /**
-     * 取消网络监听
-     */
-    protected void unListenerNetWorkState() {
-        if (mNetInfoModule != null) {
-            mNetInfoModule.onHostPause();
-        }
-    }
-
-  /*  @Override
-    public void onAutoCompletion() {
-        setStateAndUi(CURRENT_STATE_AUTO_COMPLETE);
-
-        mSaveChangeViewTIme = 0;
-
-        if (mTextureViewContainer.getChildCount() > 0) {
-            mTextureViewContainer.removeAllViews();
-        }
-
-        if (!mIfCurrentIsFullscreen)
-            getGSYVideoManager().setLastListener(null);
-        mAudioManager.abandonAudioFocus(onAudioFocusChangeListener);
-        ((Activity) getActivityContext()).getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-        releaseNetWorkState();
-
-        if (mVideoAllCallBack != null && isCurrentMediaListener()) {
-            Debuger.printfLog("onAutoComplete");
-            mVideoAllCallBack.onAutoComplete(mOriginUrl, mTitle, this);
-        }
-    }*/
+//    @Override
+//    public void onAutoCompletion() {
+//        setStateAndUi(CURRENT_STATE_AUTO_COMPLETE);
+//
+//        mSaveChangeViewTIme = 0;
+//
+//        if (mTextureViewContainer.getChildCount() > 0) {
+//            mTextureViewContainer.removeAllViews();
+//        }
+//
+//        if (!mIfCurrentIsFullscreen)
+//            getGSYVideoManager().setLastListener(null);
+//        mAudioManager.abandonAudioFocus(onAudioFocusChangeListener);
+//        ((Activity) getActivityContext()).getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+//
+//        releaseNetWorkState();
+//
+//        if (mVideoAllCallBack != null && isCurrentMediaListener()) {
+//            Debuger.printfLog("onAutoComplete");
+//            mVideoAllCallBack.onAutoComplete(mOriginUrl, mTitle, this);
+//        }
+//    }
 
     /**
      * 释放网络监听
@@ -530,34 +615,39 @@ public abstract class VideoPlayerStateView extends BaseVideoPlayerView implement
         }
     }
 
-    @Override
-    public void onCompleted() {
-        //make me normal first
-        setStateAndUi(PlayState.STATE_NORMAL);
-
-        mSaveChangeViewTIme = 0;
-
-//        if (mTextureViewContainer.getChildCount() > 0) {
-//            mTextureViewContainer.removeAllViews();
+    /**
+     * 播放错误的时候，删除缓存文件
+     */
+    protected void deleteCacheFileWhenError() {
+//        clearCurrentCache();
+//        Debuger.printfError("Link Or mCache Error, Please Try Again " + mOriginUrl);
+//        if (mCache) {
+//            Debuger.printfError("mCache Link " + mUrl);
 //        }
-
-        if (!mIsFullscreen) {
-            getVideoManager().setListener(null);
-            getVideoManager().setLastListener(null);
-        }
-//        getVideoManager().setCurrentVideoHeight(0);
-//        getVideoManager().setCurrentVideoWidth(0);
-
-//        mAudioManager.abandonAudioFocus(onAudioFocusChangeListener);
-        ((Activity) getActivityContext()).getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-        releaseNetWorkState();
-
+//        mUrl = mOriginUrl;
     }
 
-    @Override
-    public void onSeekCompleted() {
+    /**
+     * 取消网络监听
+     */
+    protected void unListenerNetWorkState() {
+        if (mNetInfoModule != null) {
+            mNetInfoModule.onHostPause();
+        }
+    }
 
+    /**
+     * 开始播放逻辑
+     */
+    protected void startButtonLogic() {
+        if (mVideoAllCallBack != null && mCurrentState == STATE_NORMAL) {
+//            Debuger.printfLog("onClickStartIcon");
+            mVideoAllCallBack.onClickStartIcon(mOriginUrl, mTitle, this);
+        } else if (mVideoAllCallBack != null) {
+//            Debuger.printfLog("onClickStartError");
+            mVideoAllCallBack.onClickStartError(mOriginUrl, mTitle, this);
+        }
+        prepareVideo();
     }
 
 //    @Override
